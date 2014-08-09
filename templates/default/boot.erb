@@ -1,0 +1,5 @@
+<% unless node[":system"][":boot"].class === nil %>
+<% node[":system"][":boot"].each do |k,v| %>
+<%= k %>="<%= v %>"
+<% end %>
+<% end %>

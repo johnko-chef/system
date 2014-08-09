@@ -18,23 +18,27 @@
 # limitations under the License.
 #
 
-template "/boot/loader.conf" do
-  source "keyval.erb"
-  owner 0
-  group 0
-  mode 0644
+if node[:virtualization][:system] == "jail"
+if node[:virtualization][:role] == "host"
+  template "/boot/loader.conf" do
+    source "loader.erb"
+    owner 0
+    group 0
+    mode 0644
+  end
+  template "/etc/sysctl.conf" do
+    source "sysctl.erb"
+    owner 0
+    group 0
+    mode 0644
+  end
+end
 end
 
 template "/etc/periodic.conf" do
-  source "keyvalquoted.erb"
+  source "periodic.erb"
   owner 0
   group 0
   mode 0644
 end
 
-template "/etc/sysctl.conf" do
-  source "keyval.erb"
-  owner 0
-  group 0
-  mode 0644
-end
