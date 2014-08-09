@@ -49,6 +49,8 @@ For example role,
 License and Author
 ==================
 
+Inspiration from Dimitri Aivaliotis http://www.youtube.com/watch?v=0UXh5EnFZrM
+
 Author:: John Ko
 
 Copyright:: 2014, John Ko
