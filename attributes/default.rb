@@ -1,7 +1,9 @@
 #
 # Cookbook Name:: system
-# Recipe:: default
+# Attributes:: default
 #
+# Author:: Ernie Brodeur <ebrodeur@ujami.net>
+# Copyright 2008-2013, Opscode, Inc.
 # Author:: John Ko <git@johnko.ca>
 # Copyright 2014, John Ko
 #
@@ -18,27 +20,9 @@
 # limitations under the License.
 #
 
-if node[:virtualization][:system] == "jail"
-if node[:virtualization][:role] == "host"
-  template "/boot/loader.conf" do
-    source "loader.erb"
-    owner 'root'
-    group node['system']['rootgroup']
-    mode 0644
-  end
-  template "/etc/sysctl.conf" do
-    source "sysctl.erb"
-    owner 'root'
-    group node['system']['rootgroup']
-    mode 0644
-  end
-end
-end
-
-template "/etc/periodic.conf" do
-  source "periodic.erb"
-    owner 'root'
-    group node['system']['rootgroup']
-  mode 0644
-end
-
+default['system']['rootgroup']    = case node['platform_family']
+                                     when 'freebsd'
+                                       'wheel'
+                                     else
+                                       'root'
+                                     end
